@@ -20,7 +20,7 @@ html, body {
 
 header {
     width: calc(100% - 20px); /* Uwzględnienie marginesów bocznych */
-    height: 68,90px;
+    height: 68.90px;
     background-color: var(--primary-color);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
@@ -67,20 +67,44 @@ main {
     display: table;
 }
 
+#addTask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+}
+
+#addTask .fa-circle-plus {
+    font-size: 4vw;
+}
+
 @media (max-width: 768px) {
     .tile:nth-child(3), .tile:nth-child(4) {
         display: none;
     }
-    .tile {
-        display: block;
-        width: calc(100% - 20px);
+    #today, #review {
+        display: none;
+        
     }
     #addTask {
+        display: blockw;
+        width: calc(100% - 20px);
         height: 68.9px;
     }
     #calendar {
+        display: block;
+        width: calc(100% - 20px);
         height: 90%;
     }
     }
     
-    
+  /* Minimalny rozmiar ikony */
+  @media (max-width: 300px) {
+    #addTask .fa-circle-plus {
+        font-size: 36px; /* minimalny rozmiar ikony */
+    }
+}
+
+
+
+

@@ -3,108 +3,147 @@
     --accent-color: #cbebee;
     --background-color: #f5f5f5;
     --text-color: #333333;
+    --weekday-color: #8798b0;
+    --day-color: #c2c7cd;
 }
 
-html, body {
-    box-sizing: border-box;
-    height: 99%;
+body, html {
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
-header {
-    width: calc(100% - 20px); /* Uwzględnienie marginesów bocznych */
-    height: 68.90px;
-    background-color: var(--primary-color);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
-    line-height: 1%;
-    padding: 10px 10px;
-    margin: 10px 10px 0 10px;
-    border-radius: 5px;
-    color: #fff;
-}
-
-main {
+    height: 100%;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  div {
+      border-radius: 5px;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    height: 50px;
+    margin: 10px 10px 5px 10px;
+  }
+  
+  .content {
+    display: flex;
     width: 100%;
-    height: 78%;
-    box-sizing: border-box;
-}
-
-.tile {
-    box-sizing: border-box;
-    width: calc(50% - 20px);
-    margin: 10px;
-    text-align: center;
-    float: left;
-    background-color: var(--accent-color);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    height: 55%;
-    border-radius: 5px;
-}
-
-/* Styl dla pierwszego i drugiego kafelka (pierwszy rząd) */
-.tile:nth-child(1), .tile:nth-child(2) {
-    margin-bottom: 5px;
-}
-
-/* Styl dla trzeciego i czwartego kafelka (drugi rząd) */
-.tile:nth-child(3), .tile:nth-child(4) {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/* Dodatkowy styl dla czyszczenia float */
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-#addTask {
+    flex: 1;
+  }
+  
+  .left-column {
+    width: calc(50% - 10px);
+    margin: 5px 5px 10px 10px;
+  }
+  
+  .top {
+      display: flex;
+      flex-direction: row;
+      height: 25%;
+  }
+  
+  .bottom {
+      display: flex;
+      height: 75%;
+  }
+  .add,
+  .review {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
-}
+    background-color: #f0f0f0;
+    width: 25%;
+    height: 100%;
+    flex: 1;
+  }
+  
+  .add {
+      margin-right: 5px;
+  }
+  
+  .review {
+      margin-left: 5px;
+  }
 
-#addTask .fa-circle-plus {
-    font-size: 4vw;
-}
+  .fa-solid.fa-circle-plus,
+  .fa-solid.fa-magnifying-glass
+  {
+    font-size: 36px;
+  }
+  
+  .left-bottom {
+    background-color: #e0e0e0;
+    flex: 2;
+    margin-top: 10px;
+  }
+  
+  .right-column {
+    width: calc(50% - 10px);
+    background-color: #d0d0d0;
+    flex: 1;
+    margin: 5px 10px 10px 5px;
+    text-align: center;
+  }
+  
+  #calendar {
+    text-align: left;
+    height: 100%;
+    width: 100%;
+    padding-top: 2%;
+    padding-left: 12%;
+  }
 
-@media (max-width: 768px) {
-    .tile:nth-child(3), .tile:nth-child(4) {
-        display: none;
-    }
-    #today, #review {
-        display: none;
-        
-    }
-    #addTask {
-        display: blockw;
-        width: calc(100% - 20px);
-        height: 68.9px;
-    }
-    #calendar {
-        display: block;
-        width: calc(100% - 20px);
-        height: 90%;
-    }
-    }
-    
-  /* Minimalny rozmiar ikony */
-  @media (max-width: 300px) {
-    #addTask .fa-circle-plus {
-        font-size: 36px; /* minimalny rozmiar ikony */
-    }
-}
+  #container {
+    display: inline-block;
+    width: 78%;
+  }
 
+  .weekDay, 
+  .day {
+    display: inline-block;
+    text-align: center;
+    background-color: var(--weekday-color);
+    width: 60px;
+    height: 60px;
+    border: 1px solid #000;
+    margin: 10px;
+    line-height: 55px;
+    font-weight: bold;
+  }
 
+  .day {
+    background-color: var(--day-color);
+    cursor: pointer;
+    font-weight: lighter;
+  }
 
+  .day:hover {
+    background-color:#a9bbd7;
+  }
 
+  #calendarHeader {
+    width: 78%;
+    height: 10%;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 55px;
+  }
+
+  #monthName {
+    margin: 0 10px 0 10px;
+  }
+  #yearNumber {
+    margin: 0 10px 0 10px;
+  }
+ i {
+  cursor: pointer;
+ }
+ 

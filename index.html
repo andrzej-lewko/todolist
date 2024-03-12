@@ -8,17 +8,31 @@
     <title>ToDoList</title>
 </head>
 <body>
-    <header>
-            <p id="date">Data: 24 stycznia 2024</p>
-            <p id="time">Godzina: 12:00</p>
-    </header>
-    <main>
-        <div class="tile" id="addTask"><i class="fa-solid fa-circle-plus"></i></div>
-        <div class="tile" id="today">Twoja dzisiejsza lista zadań</div>
-        <div class="tile"  id="calendar">Kalendarz</div>
-        <div class="tile" id="review">Przeglądaj</div>
-    </main>
-
-    <script src="script.js"></script>
+    <div class="container">
+		<div class="header">
+            <div id="date"></div>
+            <div id="time"></div>
+        </div>
+		
+    <div class="content">
+    <div class="left-column">
+		<div class=top>
+			<div class="add"><i class="fa-solid fa-circle-plus"></i></div>
+			<div class="review"><i class="fa-solid fa-magnifying-glass"></i></div>
+		</div>
+		
+		<div class="bottom">
+		    <div class="left-bottom">Dzisiejsze zadania</div>
+	    </div>
+      
+    </div>
+        <div class="right-column">
+        <div id="calendar">
+            <div id="calendarHeader"><i id="prev" class="fa-solid fa-angles-left"></i><span id="monthName">Maj</span><span id="yearNumber">2024</span><i id="next" class="fa-solid fa-angles-right"></i></div>
+            <div id="container"></div>
+        </div>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
-</html>

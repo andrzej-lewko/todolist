@@ -28,11 +28,19 @@
     </div>
         <div class="right-column">
         <div id="calendar">
-            <div id="calendarHeader"><i id="prev" class="fa-solid fa-angles-left"></i><span id="monthName">Maj</span><span id="yearNumber">2024</span><i id="next" class="fa-solid fa-angles-right"></i></div>
+            <div id="calendarHeader"><i id="prev" class="fa-solid fa-angles-left"></i><span id="monthName">Maj</span><span id="yearNumber"></span><i id="next" class="fa-solid fa-angles-right"></i></div>
             <div id="container"></div>
         </div>
         </div>
     </div>
+    <form action="#" id="taskForm">
+        <div id="nameForm">Zaplanuj zadanie</div>
+        <input type="date" name="date" id="dateTask">
+        <input type="time" name="time" id="timeTask">
+        <input type="textarea" name="textarea" id="content">
+        <button id="cancel">Anuluj</button>
+        <button id="add">Dodaj</button>
+    </form>
 </div>
 <script src="script.js"></script>
 </body>

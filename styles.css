@@ -106,16 +106,18 @@ body, html {
   }
 
   .weekDay, 
-  .day {
+  .day, 
+  .day.empty {
     display: inline-block;
     text-align: center;
     background-color: var(--weekday-color);
     width: 60px;
     height: 60px;
     border: 1px solid #000;
-    margin: 10px;
+    margin: 7px;
     line-height: 55px;
     font-weight: bold;
+    vertical-align: top;
   }
 
   .day {
@@ -128,13 +130,19 @@ body, html {
     background-color:#a9bbd7;
   }
 
+  .day.empty {
+    visibility: hidden;
+  }
+
+
   #calendarHeader {
     width: 78%;
-    height: 10%;
+    height: 5%;
+    margin-top: 0px;
     border: 1px solid black;
     text-align: center;
     font-size: 1.5em;
-    line-height: 55px;
+    line-height: 1px;
   }
 
   #monthName {
@@ -146,4 +154,114 @@ body, html {
  i {
   cursor: pointer;
  }
+
+ #taskForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 30%;
+  padding: 20px;
+  background-color: lightgray;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+ #nameForm {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 10%;
+  border: 1px solid black;
+  font-size: 24px;
+ }
+
+ #dateTask {
+  position: absolute;
+  top: 30%;
+  left: 5%;
+ }
+ #timeTask {
+  position: absolute;
+  top: 30%;
+  left: 19%;
+ }
+
+ #content {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+ }
+
+ #content {
+  height: 38.92px;
+}
  
+ #taskForm label {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+#taskForm input[type="date"] {
+  padding: 10px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+  width: 13%;
+  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  background-color: rgb(237, 223, 223);
+}
+
+#taskForm input[type="time"] {
+  height: 38.92px;
+  padding: 10px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+  width: 10%;
+  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  background-color: rgb(237, 223, 223);
+}
+
+#taskForm input[type="textarea"] {
+  width: 65%;
+  height: 38.92px;
+  padding: 10px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  background-color: rgb(237, 223, 223);
+}
+
+#cancel {
+  width: 80px;
+  height: 30px;
+  position: absolute;
+  bottom: 20%;
+  left: 35%;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+}
+
+#add {
+  width: 80px;
+  height: 30px;
+  position: absolute;
+  bottom: 20%;
+  right: 35%;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+}
+
+

@@ -1,284 +1,294 @@
 :root {
-    --primary-color: #2e3741;
-    --accent-color: #cbebee;
-    --background-color: #f5f5f5;
-    --text-color: #333333;
-    --weekday-color: #8798b0;
-    --day-color: #c2c7cd;
+  --primary-color: #2e3741;
+  --accent-color: #cbebee;
+  --background-color: #f5f5f5;
+  --text-color: #333333;
+  --weekday-color: #8798b0;
+  --day-color: #c2c7cd;
 }
 
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  
-  div {
-      border-radius: 5px;
-  }
-  .header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #ccc;
-    height: 50px;
-    margin: 10px 10px 5px 10px;
-  }
-  
-  .content {
-    display: flex;
-    width: 100%;
-    flex: 1;
-  }
-  
-  .left-column {
-    width: calc(50% - 10px);
-    margin: 5px 5px 10px 10px;
-  }
-  
-  .top {
-      display: flex;
-      flex-direction: row;
-      height: 25%;
-  }
-  
-  .bottom {
-      display: flex;
-      height: 75%;
-  }
-  .add,
-  .review {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-    width: 25%;
-    height: 100%;
-    flex: 1;
-  }
-  
-  .add {
-      margin-right: 5px;
-  }
-  
-  .review {
-      margin-left: 5px;
-  }
-
-  .fa-solid.fa-circle-plus,
-  .fa-solid.fa-magnifying-glass
-  {
-    font-size: 36px;
-  }
-  
-  .left-bottom {
-    background-color: #e0e0e0;
-    flex: 2;
-    margin-top: 10px;
-  }
-  
-  .right-column {
-    width: calc(50% - 10px);
-    background-color: #d0d0d0;
-    flex: 1;
-    margin: 5px 10px 10px 5px;
-    text-align: center;
-  }
-  
-  #calendar {
-    text-align: left;
-    height: 100%;
-    width: 100%;
-    padding-top: 2%;
-    padding-left: 12%;
-  }
-
-  #container {
-    display: inline-block;
-    width: 78%;
-  }
-
-  .weekDay, 
-  .day, 
-  .day.empty {
-    display: inline-block;
-    text-align: center;
-    background-color: var(--weekday-color);
-    width: 60px;
-    height: 60px;
-    border: 1px solid #000;
-    margin: 7px;
-    line-height: 55px;
-    font-weight: bold;
-    vertical-align: top;
-  }
-
-  .day {
-    background-color: var(--day-color);
-    cursor: pointer;
-    font-weight: lighter;
-  }
-
-  .day:hover {
-    background-color:#a9bbd7;
-  }
-
-  .day.empty {
-    visibility: hidden;
-  }
-
-
-  #calendarHeader {
-    width: 78%;
-    height: 5%;
-    margin-top: 0px;
-    border: 1px solid black;
-    text-align: center;
-    font-size: 1.5em;
-    line-height: 1px;
-  }
-
-  #monthName {
-    margin: 0 10px 0 10px;
-  }
-  #yearNumber {
-    margin: 0 10px 0 10px;
-  }
- i {
-  cursor: pointer;
- }
-
- #taskForm {
-  
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40%;
-  height: 240px;
-  padding: 20px;
-  background-color: lightgray;
-  border: 1px solid black;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  display: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
- #nameForm {
-  position: absolute;
-  top: 5%;
-  left: 50%;
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+div {
+    border-radius: 5px;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  height: 50px;
+  margin: 10px 10px 5px 10px;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
+
+.left-column {
+  width: calc(50% - 10px);
+  margin: 5px 5px 10px 10px;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    height: 25%;
+}
+
+.bottom {
+    display: flex;
+    height: 75%;
+}
+.add,
+.review {
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 10%;
-  border: 1px solid black;
-  font-size: 24px;
- }
+  background-color: #f0f0f0;
+  width: 25%;
+  height: 100%;
+  flex: 1;
+}
 
- #dateTask {
-  position: absolute;
-  top: 30%;
-  left: 5%;
- }
- #timeTask {
-  position: absolute;
-  top: 30%;
-  left: 24%;
- }
+.add {
+    margin-right: 5px;
+}
 
- #content {
-  position: absolute;
-  top: 30%;
-  left: 40%;
- }
- 
- #taskForm label {
-  margin-bottom: 10px;
-  font-size: 18px;
+.review {
+    margin-left: 5px;
+}
+
+.fa-solid.fa-circle-plus,
+.fa-solid.fa-magnifying-glass
+{
+  font-size: 36px;
+}
+
+.left-bottom {
+  background-color: #e0e0e0;
+  flex: 2;
+  margin-top: 10px;
+overflow-y: auto;
+}
+
+.right-column {
+  width: calc(50% - 10px);
+  background-color: #d0d0d0;
+  flex: 1;
+  margin: 5px 10px 10px 5px;
+  text-align: center;
+}
+
+#calendar {
+  text-align: left;
+  height: 100%;
+  width: 100%;
+  padding-top: 2%;
+  padding-left: 12%;
+}
+
+#container {
+  display: inline-block;
+  width: 78%;
+}
+
+.weekDay, 
+.day, 
+.day.empty {
+  display: inline-block;
+  text-align: center;
+  background-color: var(--weekday-color);
+  width: 60px;
+  height: 60px;
+  border: 1px solid #000;
+  margin: 7px;
+  line-height: 55px;
   font-weight: bold;
-  color: var(--text-color);
+  vertical-align: top;
+}
+
+.day {
+  background-color: var(--day-color);
+  cursor: pointer;
+  font-weight: lighter;
+}
+
+.day:hover {
+  background-color:#a9bbd7;
+}
+
+.day.empty {
+  visibility: hidden;
+}
+
+
+#calendarHeader {
+  width: 78%;
+  height: 5%;
+  margin-top: 0px;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 1px;
+}
+
+#monthName {
+  margin: 0 10px 0 10px;
+}
+#yearNumber {
+  margin: 0 10px 0 10px;
+}
+i {
+cursor: pointer;
+}
+
+#taskForm {
+
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 40%;
+height: 240px;
+padding: 20px;
+background-color: lightgray;
+border: 1px solid black;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-around;
+display: none;
+}
+
+#nameForm {
+position: absolute;
+top: 5%;
+left: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+transform: translateX(-50%);
+width: 60%;
+height: 10%;
+border: 1px solid black;
+font-size: 24px;
+}
+
+#dateTask {
+position: absolute;
+top: 30%;
+left: 5%;
+}
+#timeTask {
+position: absolute;
+top: 30%;
+left: 24%;
+}
+
+#content {
+position: absolute;
+top: 30%;
+left: 40%;
+}
+
+#taskForm label {
+margin-bottom: 10px;
+font-size: 18px;
+font-weight: bold;
+color: var(--text-color);
 }
 
 #taskForm input[type="date"] {
-  padding: 10px;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-  width: 18%;
-  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
-  background-color: rgb(237, 223, 223);
+padding: 10px;
+border: 1px solid #1a1414;
+border-radius: 4px;
+width: 18%;
+box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+background-color: rgb(237, 223, 223);
 }
 
 #taskForm input[type="time"] {
-  height: 38.92px;
-  padding: 10px;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-  width: 15%;
-  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
-  background-color: rgb(237, 223, 223);
+height: 38.92px;
+padding: 10px;
+border: 1px solid #1a1414;
+border-radius: 4px;
+width: 15%;
+box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+background-color: rgb(237, 223, 223);
 }
 
 #taskForm input[type="textarea"] {
-  width: 55%;
-  height: 38.92px;
-  padding: 10px;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
-  background-color: rgb(237, 223, 223);
+width: 55%;
+height: 38.92px;
+padding: 10px;
+border: 1px solid #1a1414;
+border-radius: 4px;
+box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+background-color: rgb(237, 223, 223);
 }
 
 #cancel {
-  width: 80px;
-  height: 30px;
-  position: absolute;
-  bottom: 20%;
-  left: 35%;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
+width: 80px;
+height: 30px;
+position: absolute;
+bottom: 20%;
+left: 35%;
+border: 1px solid #1a1414;
+border-radius: 4px;
 }
 
 #addTask {
-  width: 80px;
-  height: 30px;
-  position: absolute;
-  bottom: 20%;
-  right: 35%;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
+width: 80px;
+height: 30px;
+position: absolute;
+bottom: 20%;
+right: 35%;
+border: 1px solid #1a1414;
+border-radius: 4px;
 }
 
 .current-day {
-  background-color: #82ae8f;
+background-color: #82ae8f;
 }
 
 .taskDisplay {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  padding: 10px;
-  border: 1px solid black;
-  margin-left: 20px;
-  margin-top: 20px;
-  font-size: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 90%;
+padding: 10px;
+border: 1px solid black;
+margin-left: 20px;
+margin-top: 20px;
+font-size: 20px;
 }
 
 .fa-solid, 
 .fa-trash {
-  margin-right: 10px;
+margin-right: 10px;
+}
+
+.taskDone .taskContent {
+  color: rgb(0, 128, 0); /* Zielony kolor tekstu */
+  text-decoration: line-through; /* Przekreślenie tekstu */
+}
+
+.day.has-tasks {
+  border: 2px solid red;
 }

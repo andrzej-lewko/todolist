@@ -18,7 +18,10 @@
     <div class="left-column">
 		<div class=top>
 			<div class="add"><i class="fa-solid fa-circle-plus"></i></div>
-			<div class="review"><i class="fa-solid fa-magnifying-glass"></i></div>
+			<div class="review">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search" placeholder="Szukaj..." onkeyup="searchTask(event)" value="">
+            </div>
 		</div>
 		
 		<div class="bottom">
@@ -40,8 +43,7 @@
         <input type="textarea" name="textarea" id="content">
         <button id="cancel">Anuluj</button>
         <button id="addTask" value="Dodaj">Dodaj</button>
-    </form>
-	
+    </form>	
 </div>
 <script src="script.js"></script>
 </body>

@@ -9,7 +9,9 @@ const add = document.querySelector('.add');
 const taskForm = document.getElementById('taskForm');
 const addTask = document.getElementById('addTask');
 const cancel = document.getElementById('cancel');
+const search = document.getElementById('search');
 let tasks = [];
+let searchedText = "";
 
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
@@ -17,6 +19,7 @@ let currentMonth = new Date().getMonth();
 let year = "";
 let month = "";
 
+search.addEventListener('keyup', searchTask);
 next.addEventListener("click", nextMonth);
 prev.addEventListener("click", prevMonth);
 add.addEventListener("click", openForm);
@@ -26,15 +29,73 @@ addTask.addEventListener("click", function (event) {
 });
 cancel.addEventListener("click", closeForm);
 
+function searchTask(e) {
+    searchedText = e.target.value; // Przechowuje całą wartość wpisaną w pole wyszukiwania
+    let results = tasks.filter(task => task.taskDescr.toLowerCase().includes(searchedText.toLowerCase()));
+    displayTasks(results);
+}
+
+
+function displayTasks(tag) {
+    const tasksContainer = document.getElementById('tasksContainer');
+    tasksContainer.innerHTML = ''; // Wyczyść aktualne zadania
+
+    // Sprawdzenie, czy tag jest datą
+    if (typeof tag === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(tag)) {
+        const filteredDate = tasks.filter(element => element.date === tag)
+        filteredDate.sort((a, b) => a.time.localeCompare(b.time));
+
+        filteredDate.forEach(task => {
+            appendTaskToContainer(task, tasksContainer);
+        });
+    } else if (Array.isArray(tag)) {
+        // Jeśli tag jest tablicą zadań (wyniki wyszukiwania)
+        tag.forEach(task => {
+            appendTaskToContainer(task, tasksContainer);
+        });
+    }
+}
+function appendTaskToContainer(task, container) {
+    console.log(task, container)
+    const taskElement = document.createElement('div');
+    taskElement.className = "taskDisplay";
+    taskElement.setAttribute("data-id", task.id);
+    if (task.completed) taskElement.classList.add('taskDone');
+    container.appendChild(taskElement);
+
+    const taskContent = document.createElement('div');
+    taskContent.className = "taskContent";
+    taskContent.textContent = `${task.date}, ${task.time}, Opis: ${task.taskDescr}`;
+    taskElement.appendChild(taskContent);
+
+    const toolbox = document.createElement('div');
+    toolbox.className = "toolbox"
+    taskElement.appendChild(toolbox);
+
+    const edit = document.createElement('i');
+    edit.className = "fa-solid fa-file-pen";
+    edit.addEventListener('click', () => changeTask(task.id));
+    toolbox.appendChild(edit);
+
+    const check = document.createElement('i');
+    check.className = "fa-solid fa-circle-check";
+    check.addEventListener('click', () => completedTask(task.id));
+    toolbox.appendChild(check);
+
+    const trashIcon = document.createElement('i');
+    trashIcon.className = "fa-solid fa-trash";
+    trashIcon.addEventListener('click', () => removeTask(task.id));
+    toolbox.appendChild(trashIcon);
+
+    markDaysWithTasks();
+}
+
 function markDaysWithTasks() {
     const allDays = document.querySelectorAll('.day');
-    console.log("Tasks loaded:", tasks);
     allDays.forEach(day => {
         const dayNumber = day.textContent;
         const dateToCheck = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${dayNumber.padStart(2, '0')}`;
-        console.log("Checking date:", dateToCheck);
         const hasTasks = tasks.some(task => {
-            console.log("Task date for comparison:", task.date);
             return task.date === dateToCheck;
         });
         if (hasTasks) {
@@ -42,9 +103,6 @@ function markDaysWithTasks() {
         }
     });
 }
-
-    
-
 
 function removeTask(id) {
     let dateOfTask = tasks.find(task => task.id === id);
@@ -65,50 +123,6 @@ function completedTask(id) {
 
     const elToUpdate = tasks.find(task => task.id === id);
     elToUpdate.completed = !elToUpdate.completed;
-}
-
-function displayTasks(tag) {
-    const tasksContainer = document.getElementById('tasksContainer');
-    tasksContainer.innerHTML = ''; 
-
-    const filteredDate = tasks.filter(function (element) {
-        return element.date === tag
-    })
-
-    filteredDate.sort((a, b) => a.time.localeCompare(b.time));
-
-    for (let i = 0; i < filteredDate.length; i++) {
-        const taskElement = document.createElement('div');
-        taskElement.className = "taskDisplay";
-        taskElement.setAttribute("data-id", `${filteredDate[i].id}`);
-        if (filteredDate[i].completed) taskElement.classList.add('taskDone');
-        tasksContainer.appendChild(taskElement);
-
-        const taskContent = document.createElement('div');
-        taskContent.className = "taskContent";
-        taskContent.textContent = `${filteredDate[i].date}, ${filteredDate[i].time}, Opis: ${filteredDate[i].taskDescr}`;
-        taskElement.appendChild(taskContent);
-
-        const toolbox = document.createElement('div');
-        toolbox.className = "toolbox"
-        taskElement.appendChild(toolbox);
-
-        const edit = document.createElement('i');
-        edit.className = "fa-solid fa-file-pen";
-        edit.addEventListener('click', () => changeTask(`${filteredDate[i].id}`));
-        toolbox.appendChild(edit);
-
-        const check = document.createElement('i');
-        check.className = "fa-solid fa-circle-check";
-        check.addEventListener('click', () => completedTask(filteredDate[i].id));
-        toolbox.appendChild(check);
-
-        const trashIcon = document.createElement('i');
-        trashIcon.className = "fa-solid fa-trash";
-        trashIcon.addEventListener('click', () => removeTask(filteredDate[i].id));
-        toolbox.appendChild(trashIcon);
-    }
-    markDaysWithTasks();
 }
 
 function checkTask(e, ID) {

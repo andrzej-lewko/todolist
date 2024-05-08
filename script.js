@@ -29,6 +29,15 @@ addTask.addEventListener("click", function (event) {
 });
 cancel.addEventListener("click", closeForm);
 
+function clearInput() {
+    search.value ="";
+}
+
+function resumeDisplay(text) {
+    let results = tasks.filter(task => task.taskDescr.toLowerCase().includes(searchedText.toLowerCase()));
+    displayTasks(results);
+}
+
 function searchTask(e) {
     searchedText = e.target.value; // Przechowuje całą wartość wpisaną w pole wyszukiwania
     let results = tasks.filter(task => task.taskDescr.toLowerCase().includes(searchedText.toLowerCase()));
@@ -56,7 +65,6 @@ function displayTasks(tag) {
     }
 }
 function appendTaskToContainer(task, container) {
-    console.log(task, container)
     const taskElement = document.createElement('div');
     taskElement.className = "taskDisplay";
     taskElement.setAttribute("data-id", task.id);
@@ -106,16 +114,16 @@ function markDaysWithTasks() {
 
 function removeTask(id) {
     let dateOfTask = tasks.find(task => task.id === id);
-    console.log(dateOfTask)
     let index = tasks.findIndex(obj => obj.id === id);
     if (index !== -1) {
         tasks.splice(index, 1);
     }
-    displayTasks(dateOfTask.date);
+    resumeDisplay(searchedText);
+    updateCalendar();
+    clearInput();
 }
 
 function completedTask(id) {
-    console.log(id);
     const taskElement = document.querySelector(`[data-id="${id}"]`);
     if (taskElement) {
         taskElement.classList.toggle('taskDone');
@@ -199,7 +207,6 @@ function generateCalendar() {
         let dayElement = document.createElement('div');
         dayElement.className = "day";
         if (`${year}:${month}:day` === tasks.date) {
-            console.log("dupa")
         }
         dayElement.textContent = day;
         if (currentYear === today.getFullYear() && currentMonth === today.getMonth() && day === today.getDate()) {

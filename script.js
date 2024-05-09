@@ -98,19 +98,29 @@ function appendTaskToContainer(task, container) {
     markDaysWithTasks();
 }
 
+
+
 function markDaysWithTasks() {
     const allDays = document.querySelectorAll('.day');
     allDays.forEach(day => {
         const dayNumber = day.textContent;
         const dateToCheck = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${dayNumber.padStart(2, '0')}`;
-        const hasTasks = tasks.some(task => {
-            return task.date === dateToCheck;
-        });
-        if (hasTasks) {
-            day.classList.add('has-tasks');
+
+        const tasksForDay = tasks.filter(task => task.date === dateToCheck);
+        if (tasksForDay.length > 0) {
+            const allCompleted = tasksForDay.every(task => task.completed);
+            const anyNotCompleted = tasksForDay.some(task => !task.completed);
+
+            if (allCompleted) {
+                day.classList.remove('has-tasks')
+                day.classList.add('tasks-completed');
+            } else if (anyNotCompleted) {
+                day.classList.add('has-tasks');
+            }
         }
     });
 }
+
 
 function removeTask(id) {
     let dateOfTask = tasks.find(task => task.id === id);
@@ -131,6 +141,8 @@ function completedTask(id) {
 
     const elToUpdate = tasks.find(task => task.id === id);
     elToUpdate.completed = !elToUpdate.completed;
+
+    markDaysWithTasks();
 }
 
 function checkTask(e, ID) {

@@ -10,7 +10,9 @@ const taskForm = document.getElementById('taskForm');
 const addTask = document.getElementById('addTask');
 const cancel = document.getElementById('cancel');
 const search = document.getElementById('search');
-let tasks = [];
+const alertDiv = document.getElementById('alert');
+
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let searchedText = "";
 
 let currentYear = new Date().getFullYear();
@@ -48,20 +50,25 @@ function searchTask(e) {
 function displayTasks(tag) {
     const tasksContainer = document.getElementById('tasksContainer');
     tasksContainer.innerHTML = ''; // Wyczyść aktualne zadania
-
+    let filteredDate = "";
     // Sprawdzenie, czy tag jest datą
     if (typeof tag === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(tag)) {
-        const filteredDate = tasks.filter(element => element.date === tag)
+        filteredDate = tasks.filter(element => element.date === tag)
         filteredDate.sort((a, b) => a.time.localeCompare(b.time));
 
         filteredDate.forEach(task => {
             appendTaskToContainer(task, tasksContainer);
+            console.log(task)
         });
     } else if (Array.isArray(tag)) {
         // Jeśli tag jest tablicą zadań (wyniki wyszukiwania)
         tag.forEach(task => {
             appendTaskToContainer(task, tasksContainer);
         });
+    }
+    if (filteredDate.length < 1) {
+        tasksContainer.appendChild(alertDiv);
+        alertDiv.style.display = "flex";
     }
 }
 function appendTaskToContainer(task, container) {
@@ -98,8 +105,6 @@ function appendTaskToContainer(task, container) {
     markDaysWithTasks();
 }
 
-
-
 function markDaysWithTasks() {
     const allDays = document.querySelectorAll('.day');
     allDays.forEach(day => {
@@ -118,6 +123,7 @@ function markDaysWithTasks() {
                 day.classList.add('has-tasks');
             }
         }
+
     });
 }
 
@@ -257,10 +263,13 @@ function changeTask(ID) {
     document.getElementById("dateTask").value = getTask.date;
     document.getElementById("timeTask").value = getTask.time;
     document.getElementById("content").value = getTask.taskDescr;
+
+    
 }
 
 function closeForm(id) {
     taskForm.style.display = 'none';
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function generateUniqueId() {
@@ -313,7 +322,8 @@ function manageTask(isEdit, ID) {
             completed: false
         };
 
-        tasks.push(newTask)
+        tasks.push(newTask);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
 
     }
 

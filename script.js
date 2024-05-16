@@ -21,6 +21,8 @@ let currentMonth = new Date().getMonth();
 let year = "";
 let month = "";
 
+
+
 search.addEventListener('keyup', searchTask);
 next.addEventListener("click", nextMonth);
 prev.addEventListener("click", prevMonth);
@@ -30,6 +32,41 @@ addTask.addEventListener("click", function (event) {
     checkTask(event.target.value, document.getElementById("addTask").getAttribute('data-task-id'));
 });
 cancel.addEventListener("click", closeForm);
+
+function loginUser(event) {
+    event.preventDefault();
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+
+    if(username === 'prawidlowyUzytkownik' && password === 'prawidloweHaslo') {
+        const user = {
+            username: username,
+            registered: true
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        window.location.href = 'index.html';
+    } else {
+        alert('Nieprawidłowa nazwa użytkownika lub hasło');
+    }
+}
+
+function registerUser(event) {
+    event.preventDefault();
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+    const repeatPassword = event.target.repeatPassword.value;
+
+    if (password === repeatPassword) {
+        const user = {
+            username: username,
+            registered: true
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        window.location.href = 'logowanie.html';
+    } else {
+        alert('Hasła nie są identyczne!');
+    }
+}
 
 function clearInput() {
     search.value ="";

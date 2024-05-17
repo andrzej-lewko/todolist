@@ -21,17 +21,18 @@ let currentMonth = new Date().getMonth();
 let year = "";
 let month = "";
 
+document.addEventListener('DOMContentLoaded', function() {
+let user = localStorage.getItem('user');
 
-
-search.addEventListener('keyup', searchTask);
-next.addEventListener("click", nextMonth);
-prev.addEventListener("click", prevMonth);
-add.addEventListener("click", openForm);
-addTask.addEventListener("click", function (event) {
-    event.preventDefault();
-    checkTask(event.target.value, document.getElementById("addTask").getAttribute('data-task-id'));
-});
-cancel.addEventListener("click", closeForm);
+if (!user) {
+window.location.href = "login.html"
+} else {
+const userInfo = JSON.parse(user);
+if (!userInfo.registered) {
+window.location.href = "register.html"
+}
+}
+})
 
 function loginUser(event) {
     event.preventDefault();
@@ -67,6 +68,18 @@ function registerUser(event) {
         alert('Hasła nie są identyczne!');
     }
 }
+
+search.addEventListener('keyup', searchTask);
+next.addEventListener("click", nextMonth);
+prev.addEventListener("click", prevMonth);
+add.addEventListener("click", openForm);
+addTask.addEventListener("click", function (event) {
+    event.preventDefault();
+    checkTask(event.target.value, document.getElementById("addTask").getAttribute('data-task-id'));
+});
+cancel.addEventListener("click", closeForm);
+
+
 
 function clearInput() {
     search.value ="";
@@ -301,7 +314,7 @@ function changeTask(ID) {
     document.getElementById("timeTask").value = getTask.time;
     document.getElementById("content").value = getTask.taskDescr;
 
-    
+   
 }
 
 function closeForm(id) {

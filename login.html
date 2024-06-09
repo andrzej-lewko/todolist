@@ -10,15 +10,15 @@
 <body>
     <div class="login-container">
         <h2>Logowanie</h2>
-        <form onsubmit="loginUser(event)">
-            <input type="text" name="username" placeholder="Nazwa użytkownika" required>
-            <input type="password" name="password" placeholder="Hasło" required>
+        <form id="login-form">
+            <input type="text" id="username" name="username" placeholder="Nazwa użytkownika" required autocomplete="username">
+            <input type="password" id="password" name="password" placeholder="Hasło" required autocomplete="current-password">
             <input type="submit" value="Zaloguj się">
         </form>
         <div class="register-link">
-            <p>Nie masz konta? <a href="/register.html">Zarejestruj się</a></p>
+            <p>Nie masz konta? <a href="register.html">Zarejestruj się</a></p>
         </div>
     </div>	  
-</div>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+</html>

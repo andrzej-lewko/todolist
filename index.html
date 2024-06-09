@@ -9,41 +9,51 @@
 </head>
 <body>
     <div class="container">
-		<div class="header">
+        <div class="header">
             <div id="date"></div>
             <div id="time"></div>
+            <div id="user">Zalogowany jako <span id="name"></span><button id="logout">Wyloguj</button></div>
         </div>
-		
-    <div class="content">
-    <div class="left-column">
-		<div class=top>
-			<div class="add"><i class="fa-solid fa-circle-plus"></i></div>
-			<div class="review">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="search" placeholder="Szukaj..." onkeyup="searchTask(event)" value="">
+        
+        <div class="content">
+            <div class="left-column">
+                <div class="top">
+                    <div class="add"><i class="fa-solid fa-circle-plus"></i></div>
+                    <div class="review">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search" placeholder="Szukaj..." value="">
+                    </div>
+                </div>
+                
+                <div class="bottom">
+                    <div class="left-bottom">
+                        <div id="tasksContainer">
+                            <div id="alert">Brak zadań w wybranym terminie!</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-		</div>
-		
-		<div class="bottom">
-		    <div class="left-bottom"><div id="tasksContainer"><div id="alert">Brak zadań w wybranym terminie!</div></div></div>
-	    </div>
-      
-    </div>
-        <div class="right-column">
-        <div id="calendar">
-            <div id="calendarHeader"><i id="prev" class="fa-solid fa-angles-left"></i><span id="monthName">Maj</span><span id="yearNumber"></span><i id="next" class="fa-solid fa-angles-right"></i></div>
-            <div id="container"></div>
+            <div class="right-column">
+                <div id="calendar">
+                    <div id="calendarHeader">
+                        <i id="prev" class="fa-solid fa-angles-left"></i>
+                        <span id="monthName">Maj</span>
+                        <span id="yearNumber"></span>
+                        <i id="next" class="fa-solid fa-angles-right"></i>
+                    </div>
+                    <div id="container"></div>
+                </div>
+            </div>
         </div>
-        </div>
+        <form action="#" id="taskForm">
+            <div id="nameForm">Zaplanuj zadanie</div>
+            <input type="date" name="date" id="dateTask">
+            <input type="time" name="time" id="timeTask">
+            <input type="textarea" name="textarea" id="content">
+            <button id="cancel">Anuluj</button>
+            <button id="addTask" value="Dodaj">Dodaj</button>
+        </form>    
     </div>
-    <form action="#" id="taskForm">
-        <div id="nameForm">Zaplanuj zadanie</div>
-        <input type="date" name="date" id="dateTask">
-        <input type="time" name="time" id="timeTask">
-        <input type="textarea" name="textarea" id="content">
-        <button id="cancel">Anuluj</button>
-        <button id="addTask" value="Dodaj">Dodaj</button>
-    </form>	
-</div>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+</html>

@@ -10,13 +10,13 @@
 <body>
     <div class="login-container">
         <h2>Rejestracja</h2>
-        <form onsubmit="registerUser(event)">
-            <input type="text" name="username" placeholder="Login" required>
-            <input type="password" name="password" placeholder="Hasło" required>
-            <input type="password" name="repeatPassword" placeholder="Powtórz hasło" required>
+        <form id="register-form">
+            <input type="text" name="username" placeholder="Login" required autocomplete="username">
+            <input type="password" name="password" placeholder="Hasło" required autocomplete="new-password">
+            <input type="password" name="repeatPassword" placeholder="Powtórz hasło" required autocomplete="new-password">
             <input type="submit" value="Zarejestruj się">
         </form>
-    </div>	  
-</div>
-<script src="script.js"></script>
+    </div>
+    <script src="script.js"></script>
 </body>
+</html>

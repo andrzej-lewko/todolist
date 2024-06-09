@@ -23,13 +23,43 @@ div {
     border-radius: 5px;
 }
 .header {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #ccc;
-  height: 50px;
+  height: 70px;
   margin: 10px 10px 5px 10px;
+}
+
+#user {
+  position: absolute;
+  top: auto;
+  bottom: auto;
+  right: 0px;
+  width: auto;
+}
+
+#name {
+  font-weight: bold;
+}
+
+
+#logout {
+  background-color: #5c67f2; /* Kolor tła */
+  color: white; /* Kolor tekstu */
+  border: none; /* Brak obramowania */
+  border-radius: 5px; /* Zaokrąglenie rogów */
+  padding: 10px 20px; /* Wewnętrzne marginesy */
+  font-size: 14px; /* Rozmiar czcionki */
+  cursor: pointer; /* Zmiana kursora na rękę */
+  transition: background-color 0.3s ease; /* Efekt przejścia dla zmiany koloru tła */
+  margin-left: 10px; /* Lewy margines */
+}
+
+#logout:hover {
+  background-color: #4a54e1; /* Zmiana koloru tła przy najechaniu */
 }
 
 .content {
@@ -150,16 +180,29 @@ div {
   visibility: hidden;
 }
 
-
 #calendarHeader {
-  width: 78%;
-  height: 5%;
-  margin-top: 0px;
-  border: 1px solid black;
-  text-align: center;
-  font-size: 1.5em;
-  line-height: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5c67f2; /* Kolor tła */
+  color: white; /* Kolor tekstu */
+  width: 66%;
+  padding: 10px 20px; /* Wewnętrzne marginesy */
+  border-radius: 5px; /* Zaokrąglenie rogów */
+  margin-bottom: 10px; /* Dolny margines */
+  font-size: 18px; /* Rozmiar czcionki */
+  font-weight: bold; /* Pogrubienie czcionki */
 }
+
+#calendarHeader i {
+  cursor: pointer; /* Zmiana kursora na rękę */
+  transition: color 0.3s ease; /* Efekt przejścia dla zmiany koloru */
+}
+
+#calendarHeader i:hover {
+  color: #ffcc00; /* Zmiana koloru po najechaniu */
+}
+
 
 #monthName {
   margin: 0 10px 0 10px;
@@ -168,135 +211,134 @@ div {
   margin: 0 10px 0 10px;
 }
 i {
-cursor: pointer;
+  cursor: pointer;
 }
 
 #taskForm {
-
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 40%;
-height: 240px;
-padding: 20px;
-background-color: lightgray;
-border: 1px solid black;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-border-radius: 8px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-around;
-display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 240px;
+  padding: 20px;
+  background-color: lightgray;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  display: none;
 }
 
 #nameForm {
-position: absolute;
-top: 5%;
-left: 50%;
-display: flex;
-justify-content: center;
-align-items: center;
-transform: translateX(-50%);
-width: 60%;
-height: 10%;
-border: 1px solid black;
-font-size: 24px;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 10%;
+  border: 1px solid black;
+  font-size: 24px;
 }
 
 #dateTask {
-position: absolute;
-top: 30%;
-left: 5%;
+  position: absolute;
+  top: 30%;
+  left: 5%;
 }
 #timeTask {
-position: absolute;
-top: 30%;
-left: 24%;
+  position: absolute;
+  top: 30%;
+  left: 24%;
 }
 
 #content {
-position: absolute;
-top: 30%;
-left: 40%;
+  position: absolute;
+  top: 30%;
+  left: 40%;
 }
 
 #taskForm label {
-margin-bottom: 10px;
-font-size: 18px;
-font-weight: bold;
-color: var(--text-color);
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
 }
 
 #taskForm input[type="date"] {
-padding: 10px;
-border: 1px solid #1a1414;
-border-radius: 4px;
-width: 18%;
-box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
-background-color: rgb(237, 223, 223);
+  padding: 10px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+  width: 18%;
+  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  background-color: rgb(237, 223, 223);
 }
 
 #taskForm input[type="time"] {
-height: 38.92px;
-padding: 10px;
-border: 1px solid #1a1414;
-border-radius: 4px;
-width: 15%;
-box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
-background-color: rgb(237, 223, 223);
+  height: 38.92px;
+  padding: 10px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+  width: 15%;
+  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  background-color: rgb(237, 223, 223);
 }
 
 #taskForm input[type="textarea"] {
-width: 55%;
-height: 38.92px;
-padding: 10px;
-border: 1px solid #1a1414;
-border-radius: 4px;
-box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
-background-color: rgb(237, 223, 223);
+  width: 55%;
+  height: 38.92px;
+  padding: 10px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  background-color: rgb(237, 223, 223);
 }
 
 #cancel {
-width: 80px;
-height: 30px;
-position: absolute;
-bottom: 20%;
-left: 35%;
-border: 1px solid #1a1414;
-border-radius: 4px;
+  width: 80px;
+  height: 30px;
+  position: absolute;
+  bottom: 20%;
+  left: 35%;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
 }
 
 #addTask {
-width: 80px;
-height: 30px;
-position: absolute;
-bottom: 20%;
-right: 35%;
-border: 1px solid #1a1414;
-border-radius: 4px;
+  width: 80px;
+  height: 30px;
+  position: absolute;
+  bottom: 20%;
+  right: 35%;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
 }
 
 .current-day {
-background-color: #82ae8f;
+  background-color: #82ae8f;
 }
 
 .taskDisplay {
-display: flex;
-align-items: center;
-justify-content: space-between;
-width: 90%;
-padding: 10px;
-border: 1px solid black;
-margin-left: 20px;
-margin-top: 20px;
-font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  padding: 10px;
+  border: 1px solid black;
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 20px;
 }
 
 .fa-solid, 
 .fa-trash {
-margin-right: 10px;
+  margin-right: 10px;
 }
 
 .taskDone .taskContent {
@@ -311,4 +353,3 @@ margin-right: 10px;
 .day.has-tasks {
   border: 2px solid red;
 }
-

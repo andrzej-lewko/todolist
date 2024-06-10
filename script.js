@@ -77,10 +77,11 @@ function initializeApp() {
 
     logoutButton.addEventListener('click', logout);
 
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const currentUser = localStorage.getItem('currentUser');
+    let tasks = JSON.parse(localStorage.getItem(currentUser)) || [];
     let searchedText = "";
     
-    const currentUser = localStorage.getItem('currentUser');
+    
     name.textContent = ` ${currentUser}`;
     
     let currentYear = new Date().getFullYear();
@@ -106,7 +107,12 @@ function initializeApp() {
         searchedText = e.target.value;
         let results = tasks.filter(task => task.taskDescr.toLowerCase().includes(searchedText.toLowerCase()));
         /*Do sprawdzenia czy można zablokować wyświetlanie gdy input jest pusty */
-        displayTasks(results); 
+        if (searchedText) {
+            displayTasks(results); 
+        } else {
+            console.log('brak wyników')
+        }
+        
     }
 
     function resumeDisplay(text) {
@@ -358,7 +364,7 @@ function initializeApp() {
             id = generateUniqueId();
             let newTask = { id, date: dateValue, time: timeValue, taskDescr: taskContent, completed: false };
             tasks.push(newTask);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem(currentUser, JSON.stringify(tasks));
         }
 
         document.getElementById('dateTask').value = '';

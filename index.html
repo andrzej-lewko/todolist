@@ -10,15 +10,21 @@
 <body>
     <div class="container">
         <div class="header">
-            <div id="date"></div>
-            <div id="time"></div>
-            <div id="user">Zalogowany jako <span id="name"></span><button id="logout">Wyloguj</button></div>
+            <div id="currentDate">
+                <div id="date"></div>
+                <div id="time"></div>
+            </div>
+            <div class="add-header"><i class="fa-solid fa-circle-plus"></i></div>
+            <div id="user-panel">
+                <div id="user"><span id="info">Zalogowany jako </span><span id="name"></span></div>
+                <div id="logout-container"><button id="logout">Wyloguj</button></div>
+            </div>    
         </div>
         
         <div class="content">
             <div class="left-column">
                 <div class="top">
-                    <div class="add"><i class="fa-solid fa-circle-plus"></i></div>
+                    <div class="add"><!--<i class="fa-solid fa-circle-plus"></i>--></div>
                     <div class="review">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" id="search" placeholder="Szukaj..." value="">

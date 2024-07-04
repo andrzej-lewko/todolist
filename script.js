@@ -80,10 +80,9 @@ function initializeApp() {
     const currentUser = localStorage.getItem('currentUser');
     let tasks = JSON.parse(localStorage.getItem(currentUser)) || [];
     let searchedText = "";
-    
-    
+
     name.textContent = ` ${currentUser}`;
-    
+
     let currentYear = new Date().getFullYear();
     let currentMonth = new Date().getMonth();
 
@@ -106,13 +105,11 @@ function initializeApp() {
     function searchTask(e) {
         searchedText = e.target.value;
         let results = tasks.filter(task => task.taskDescr.toLowerCase().includes(searchedText.toLowerCase()));
-        /*Do sprawdzenia czy można zablokować wyświetlanie gdy input jest pusty */
         if (searchedText) {
-            displayTasks(results); 
+            displayTasks(results);
         } else {
-            console.log('brak wyników')
+            console.log('brak wyników');
         }
-        
     }
 
     function resumeDisplay(text) {
@@ -126,7 +123,7 @@ function initializeApp() {
         let filteredDate = "";
 
         if (typeof tag === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(tag)) {
-            filteredDate = tasks.filter(element => element.date === tag)
+            filteredDate = tasks.filter(element => element.date === tag);
             filteredDate.sort((a, b) => a.time.localeCompare(b.time));
 
             filteredDate.forEach(task => appendTaskToContainer(task, tasksContainer));
@@ -152,7 +149,7 @@ function initializeApp() {
         taskElement.appendChild(taskContent);
 
         const toolbox = document.createElement('div');
-        toolbox.className = "toolbox"
+        toolbox.className = "toolbox";
         taskElement.appendChild(toolbox);
 
         const edit = document.createElement('i');
@@ -185,7 +182,7 @@ function initializeApp() {
                 const anyNotCompleted = tasksForDay.some(task => !task.completed);
 
                 if (allCompleted) {
-                    day.classList.remove('has-tasks')
+                    day.classList.remove('has-tasks');
                     day.classList.add('tasks-completed');
                 } else if (anyNotCompleted) {
                     day.classList.add('has-tasks');
@@ -278,14 +275,15 @@ function initializeApp() {
         let firstDay = new Date(currentYear, currentMonth).getDay();
         firstDay = firstDay === 0 ? 6 : firstDay - 1;
         let today = new Date();
-
+    
         for (let i = 0; i < firstDay; i++) {
             let emptyCell = document.createElement('div');
             emptyCell.className = "day empty";
             container.appendChild(emptyCell);
         }
-
-        for (let day = 1; day <= daysInMonth; day++) {
+    
+        let day;
+        for (day = 1; day <= daysInMonth; day++) {
             let dayElement = document.createElement('div');
             dayElement.className = "day";
             dayElement.textContent = day;
@@ -296,7 +294,7 @@ function initializeApp() {
             container.appendChild(dayElement);
         }
     }
-
+    
     function dayName() {
         const days = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
         days.forEach(day => {
@@ -306,6 +304,7 @@ function initializeApp() {
             container.appendChild(dayOfWeek);
         });
     }
+    
 
     function openForm() {
         taskForm.style.display = 'flex';
@@ -379,3 +378,20 @@ function initializeApp() {
     updateDateTime();
     updateCalendar();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    function checkScreenWidth() {
+        const screenWidth = screen.width;
+        const addButton = document.querySelector('.fa-circle-plus');
+
+        if (screenWidth < 768) {
+            document.querySelector('.add-header').appendChild(addButton);
+        } else {
+            document.querySelector('.top .add').appendChild(addButton);
+        }
+    }
+
+    checkScreenWidth();
+
+    window.addEventListener('resize', checkScreenWidth);
+});

@@ -9,23 +9,26 @@
 
 body, html {
   margin: 0;
-  padding: 0;
+  padding: 10;
   height: 100%;
 }
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
+
 div {
-    border-radius: 5px;
+  border-radius: 5px;
 }
+
 .header {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: #ccc;
@@ -33,33 +36,52 @@ div {
   margin: 10px 10px 5px 10px;
 }
 
+#currentDate {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.add-header {
+  display: none; /* Initially hidden */
+}
+
+#user-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 180px;
+  margin-right: 10px;
+  padding: 4px;
+}
+
 #user {
-  position: absolute;
-  top: auto;
-  bottom: auto;
-  right: 0px;
-  width: auto;
+  background-color: red;
 }
 
 #name {
   font-weight: bold;
 }
 
+#logout-container {
+  margin-top: 10px;
+}
 
 #logout {
-  background-color: #5c67f2; /* Kolor tła */
-  color: white; /* Kolor tekstu */
-  border: none; /* Brak obramowania */
-  border-radius: 5px; /* Zaokrąglenie rogów */
-  padding: 10px 20px; /* Wewnętrzne marginesy */
-  font-size: 14px; /* Rozmiar czcionki */
-  cursor: pointer; /* Zmiana kursora na rękę */
-  transition: background-color 0.3s ease; /* Efekt przejścia dla zmiany koloru tła */
-  margin-left: 10px; /* Lewy margines */
+  background-color: #5c67f2;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
 }
 
 #logout:hover {
-  background-color: #4a54e1; /* Zmiana koloru tła przy najechaniu */
+  background-color: #4a54e1;
 }
 
 .content {
@@ -74,15 +96,16 @@ div {
 }
 
 .top {
-    display: flex;
-    flex-direction: row;
-    height: 25%;
+  display: flex;
+  flex-direction: row;
+  height: 25%;
 }
 
 .bottom {
-    display: flex;
-    height: 75%;
+  display: flex;
+  height: 75%;
 }
+
 .add,
 .review {
   display: flex;
@@ -95,16 +118,15 @@ div {
 }
 
 .add {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .review {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .fa-solid.fa-circle-plus,
-.fa-solid.fa-magnifying-glass
-{
+.fa-solid.fa-magnifying-glass {
   font-size: 36px;
 }
 
@@ -114,6 +136,7 @@ div {
   flex: 2;
   margin-top: 10px;
   overflow-y: auto;
+  max-height: 100vh;
 }
 
 #alert {
@@ -139,16 +162,23 @@ div {
 }
 
 #calendar {
-  text-align: left;
+  text-align: center;
   height: 100%;
   width: 100%;
   padding-top: 2%;
-  padding-left: 12%;
+  
 }
 
-#container {
+/*#container {
   display: inline-block;
   width: 78%;
+}*/
+
+#container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  width: 100%;
 }
 
 .weekDay, 
@@ -184,86 +214,39 @@ div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #5c67f2; /* Kolor tła */
-  color: white; /* Kolor tekstu */
-  width: 66%;
-  padding: 10px 20px; /* Wewnętrzne marginesy */
-  border-radius: 5px; /* Zaokrąglenie rogów */
-  margin-bottom: 10px; /* Dolny margines */
-  font-size: 18px; /* Rozmiar czcionki */
-  font-weight: bold; /* Pogrubienie czcionki */
+  background-color: #5c67f2;
+  color: white;
+
+  padding: 10px 20px;
+  border-radius: 5px;
+
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #calendarHeader i {
-  cursor: pointer; /* Zmiana kursora na rękę */
-  transition: color 0.3s ease; /* Efekt przejścia dla zmiany koloru */
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 #calendarHeader i:hover {
-  color: #ffcc00; /* Zmiana koloru po najechaniu */
+  color: #ffcc00;
 }
-
 
 #monthName {
-  margin: 0 10px 0 10px;
+  margin: 0 10px;
 }
+
 #yearNumber {
-  margin: 0 10px 0 10px;
+  margin: 0 10px;
 }
+
 i {
   cursor: pointer;
 }
 
-#taskForm {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40%;
-  height: 240px;
-  padding: 20px;
-  background-color: lightgray;
-  border: 1px solid black;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  display: none;
-}
-
-#nameForm {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 10%;
-  border: 1px solid black;
-  font-size: 24px;
-}
-
-#dateTask {
-  position: absolute;
-  top: 30%;
-  left: 5%;
-}
-#timeTask {
-  position: absolute;
-  top: 30%;
-  left: 24%;
-}
-
-#content {
-  position: absolute;
-  top: 30%;
-  left: 40%;
-}
-
+/*
 #taskForm label {
   margin-bottom: 10px;
   font-size: 18px;
@@ -276,7 +259,7 @@ i {
   border: 1px solid #1a1414;
   border-radius: 4px;
   width: 18%;
-  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  box-sizing: border-box;
   background-color: rgb(237, 223, 223);
 }
 
@@ -286,7 +269,7 @@ i {
   border: 1px solid #1a1414;
   border-radius: 4px;
   width: 15%;
-  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  box-sizing: border-box;
   background-color: rgb(237, 223, 223);
 }
 
@@ -296,7 +279,7 @@ i {
   padding: 10px;
   border: 1px solid #1a1414;
   border-radius: 4px;
-  box-sizing: border-box; /* Dodaje padding wewnątrz szerokości */
+  box-sizing: border-box;
   background-color: rgb(237, 223, 223);
 }
 
@@ -318,6 +301,75 @@ i {
   right: 35%;
   border: 1px solid #1a1414;
   border-radius: 4px;
+}*/
+
+#taskForm {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 70%;
+  padding: 20px;
+  background-color: lightgray;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  display: none;
+}
+
+#nameForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: auto;
+  border: 1px solid black;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+#dateTask,
+#timeTask,
+#content {
+  padding: 5px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: rgb(237, 223, 223);
+  margin-bottom: 10px;
+  width: 60%;
+  height: auto;
+  text-align: center;
+}
+
+#content {
+  width: 80%;
+  overflow-y: scroll;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+
+#cancel,
+#addTask {
+  position: absolute;
+  bottom: 10%;
+  width: 80px;
+  height: 30px;
+  border: 1px solid #1a1414;
+  border-radius: 4px;
+}
+
+#cancel {
+  left: 35%;
+}
+
+#addTask {
+  right: 35%;
 }
 
 .current-day {
@@ -325,16 +377,62 @@ i {
 }
 
 .taskDisplay {
+  position: relative;
+  display: flex;
+  align-items: flex-start; /* Zmiana z center na flex-start */
+  justify-content: flex-start; /* Zmiana z space-between na flex-start */
+  width: 90%;
+  border: 1px solid black;
+  margin-left: 0px;
+  margin-top: 20px;
+  font-size: 20px;
+  word-wrap: break-word; /* Allow long words to be broken and wrap to the next line */
+  word-break: break-all; /* Break words at any point to wrap to the next line */
+  white-space: normal; /* Allow text to wrap */
+  padding: 10px; /* Dodanie padding, aby tekst nie stykał się z krawędziami */
+  box-sizing: border-box; /* Upewnienie się, że padding jest wliczany do szerokości i wysokości */
+}
+
+.toolbox {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+
+  padding: 2px;
+  border-radius: 4px; /* Opcjonalnie, dla zaokrąglonych rogów */
+}
+
+.taskContent {
+  margin-right: 50px; /* Dodanie marginesu, aby tekst nie nachodził na toolbox */
+}
+
+/*.taskDisplay {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 90%;
-  padding: 10px;
-  border: 1px solid black;
-  margin-left: 20px;
+  /*padding: 10px;*/
+  /*border: 1px solid black;
+  margin-left: 0px;
   margin-top: 20px;
   font-size: 20px;
-}
+  word-wrap: break-word; /* Allow long words to be broken and wrap to the next line */
+  /*word-break: break-all; /* Break words at any point to wrap to the next line */
+  /*white-space: normal; /* Allow text to wrap */
+/*
+
+.toolbox {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}*/
 
 .fa-solid, 
 .fa-trash {
@@ -342,8 +440,9 @@ i {
 }
 
 .taskDone .taskContent {
-  color: rgb(0, 128, 0); /* Zielony kolor tekstu */
-  text-decoration: line-through; /* Przekreślenie tekstu */
+  color: rgb(0, 128, 0);
+  text-decoration: line-through;
+  flex: 1;
 }
 
 .day.tasks-completed {
@@ -352,4 +451,138 @@ i {
 
 .day.has-tasks {
   border: 2px solid red;
+}
+
+@media (max-width: 1100px) {
+  .right-column {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #d0d0d0;
+    flex: 1;
+    margin: 10px;
+    text-align: center;
+  }
+
+  .left-column {
+    width: 30%;
+  }
+  #taskContainer {
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+
+  .taskDisplay {
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
+  }
+
+  
+
+  .review {
+    display: none;
+  }
+}
+
+/* Media queries for mobile devices */
+@media (max-width: 768px) {
+  #info {
+    display: none;
+  }
+
+  #header {
+    width: calc(100% - 20px);
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  #user-panel {
+    width: auto;
+    height: auto;
+    margin: 0;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  #user {
+    margin-right: 5px;
+  }
+
+  #logout-container {
+    margin-top: 10px;
+    margin-bottom: 2px;
+  }
+
+  .add {
+    display: none;
+  }
+
+  .add-header {
+    width: 36px;
+    height: 36px;
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .review {
+    display: none;
+  }
+
+  .right-column {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: #d0d0d0;
+    flex: 1;
+    margin: 10px;
+    text-align: center;
+  }
+  .left-column {
+    display: none;
+  }
+
+  #calendar {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+  }
+
+  #calendarHeader {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #5c67f2;
+    color: white;
+    border-radius: 5px;
+
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  #container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    width: 100%;
+  }
+
+  .weekDay, 
+  .day, 
+  .day.empty {
+    width: 80%; /* width: 100% / 7 minus gap */
+    height: calc((100vw - 4px * 7) / 7); /* height: (width of the viewport minus total gaps) divided by 7 */
+    border: 1px solid #000;
+    font-size: calc((100vw - 4px * 7) / 20);
+    line-height: calc((100vw - 4px * 7) / 7);
+  }
 }

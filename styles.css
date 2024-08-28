@@ -7,11 +7,13 @@
   --day-color: #c2c7cd;
 }
 
+
 body, html {
   margin: 0;
   padding: 10;
   height: 100%;
 }
+
 
 .container {
   position: relative;
@@ -21,9 +23,12 @@ body, html {
 }
 
 
+
+
 div {
   border-radius: 5px;
 }
+
 
 .header {
   position: relative;
@@ -36,15 +41,18 @@ div {
   margin: 10px 10px 5px 10px;
 }
 
+
 #currentDate {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
+
 .add-header {
-  display: none; /* Initially hidden */
+  display: none;
 }
+
 
 #user-panel {
   display: flex;
@@ -55,17 +63,15 @@ div {
   padding: 4px;
 }
 
-#user {
-  background-color: red;
-}
-
 #name {
   font-weight: bold;
 }
 
+
 #logout-container {
   margin-top: 10px;
 }
+
 
 #logout {
   background-color: #5c67f2;
@@ -80,9 +86,11 @@ div {
   margin-left: 10px;
 }
 
+
 #logout:hover {
   background-color: #4a54e1;
 }
+
 
 .content {
   display: flex;
@@ -90,10 +98,12 @@ div {
   flex: 1;
 }
 
+
 .left-column {
   width: calc(50% - 10px);
   margin: 5px 5px 10px 10px;
 }
+
 
 .top {
   display: flex;
@@ -101,12 +111,14 @@ div {
   height: 25%;
 }
 
+
 .bottom {
   display: flex;
   height: 75%;
 }
 
-.add,
+
+#add,
 .review {
   display: flex;
   justify-content: center;
@@ -117,18 +129,22 @@ div {
   flex: 1;
 }
 
-.add {
+
+#add {
   margin-right: 5px;
 }
+
 
 .review {
   margin-left: 5px;
 }
 
+
 .fa-solid.fa-circle-plus,
 .fa-solid.fa-magnifying-glass {
   font-size: 36px;
 }
+
 
 .left-bottom {
   position: relative;
@@ -139,19 +155,21 @@ div {
   max-height: 100vh;
 }
 
+
 #alert {
   display: none;
   align-items: center;
   justify-content: center;
   width: 50%;
   height: 10%;
-  border: 1px solid #000;
   position: absolute;
   left: 25%;
   top: 10%;
   text-align: center;
   color: #eb0d0d;
+  font-size: 1.5em;
 }
+
 
 .right-column {
   width: calc(50% - 10px);
@@ -161,28 +179,27 @@ div {
   text-align: center;
 }
 
+
 #calendar {
   text-align: center;
   height: 100%;
   width: 100%;
   padding-top: 2%;
-  
+ 
 }
-
-/*#container {
-  display: inline-block;
-  width: 78%;
-}*/
 
 #container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
   width: 100%;
+  padding-left: 3%;
+  padding-right: 1%;
 }
 
-.weekDay, 
-.day, 
+
+.weekDay,
+.day,
 .day.empty {
   display: inline-block;
   text-align: center;
@@ -196,19 +213,23 @@ div {
   vertical-align: top;
 }
 
+
 .day {
   background-color: var(--day-color);
   cursor: pointer;
   font-weight: lighter;
 }
 
+
 .day:hover {
   background-color:#a9bbd7;
 }
 
+
 .day.empty {
   visibility: hidden;
 }
+
 
 #calendarHeader {
   display: flex;
@@ -217,100 +238,50 @@ div {
   background-color: #5c67f2;
   color: white;
 
+
   padding: 10px 20px;
   border-radius: 5px;
+
 
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
 }
+
 
 #calendarHeader i {
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
+
 #calendarHeader i:hover {
   color: #ffcc00;
 }
+
 
 #monthName {
   margin: 0 10px;
 }
 
+
 #yearNumber {
   margin: 0 10px;
 }
+
 
 i {
   cursor: pointer;
 }
 
-/*
-#taskForm label {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--text-color);
-}
-
-#taskForm input[type="date"] {
-  padding: 10px;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-  width: 18%;
-  box-sizing: border-box;
-  background-color: rgb(237, 223, 223);
-}
-
-#taskForm input[type="time"] {
-  height: 38.92px;
-  padding: 10px;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-  width: 15%;
-  box-sizing: border-box;
-  background-color: rgb(237, 223, 223);
-}
-
-#taskForm input[type="textarea"] {
-  width: 55%;
-  height: 38.92px;
-  padding: 10px;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: rgb(237, 223, 223);
-}
-
-#cancel {
-  width: 80px;
-  height: 30px;
-  position: absolute;
-  bottom: 20%;
-  left: 35%;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-}
-
-#addTask {
-  width: 80px;
-  height: 30px;
-  position: absolute;
-  bottom: 20%;
-  right: 35%;
-  border: 1px solid #1a1414;
-  border-radius: 4px;
-}*/
 
 #taskForm {
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 70%;
-  padding: 20px;
+  width: 40%;
+  height: 300px;
   background-color: lightgray;
   border: 1px solid black;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -321,16 +292,21 @@ i {
   display: none;
 }
 
+
 #nameForm {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  height: auto;
+  width: 100%;
+  height: 2.5em;
   border: 1px solid black;
-  font-size: 1em;
-  margin-bottom: 5px;
+  background-color: gray;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #fff;
 }
+
 
 #dateTask,
 #timeTask,
@@ -346,11 +322,17 @@ i {
   text-align: center;
 }
 
-#content {
-  width: 80%;
-  overflow-y: scroll;
-  word-break: break-all;
-  word-wrap: break-word;
+
+textarea {
+    resize: none;
+    height: 100px;
+    overflow-y: scroll;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%; 
+    background-color: rgb(237, 223, 223);
+    border: 1px solid #1a1414;
+    border-radius: 4px;
 }
 
 
@@ -364,34 +346,39 @@ i {
   border-radius: 4px;
 }
 
+
 #cancel {
-  left: 35%;
+  left: 20%;
 }
 
+
 #addTask {
-  right: 35%;
+  right: 20%;
 }
+
 
 .current-day {
   background-color: #82ae8f;
 }
 
+
 .taskDisplay {
   position: relative;
   display: flex;
-  align-items: flex-start; /* Zmiana z center na flex-start */
-  justify-content: flex-start; /* Zmiana z space-between na flex-start */
+  align-items: flex-start; 
+  justify-content: flex-start; 
   width: 90%;
   border: 1px solid black;
   margin-left: 0px;
   margin-top: 20px;
   font-size: 20px;
-  word-wrap: break-word; /* Allow long words to be broken and wrap to the next line */
-  word-break: break-all; /* Break words at any point to wrap to the next line */
-  white-space: normal; /* Allow text to wrap */
-  padding: 10px; /* Dodanie padding, aby tekst nie stykał się z krawędziami */
-  box-sizing: border-box; /* Upewnienie się, że padding jest wliczany do szerokości i wysokości */
+  word-wrap: break-word;
+  word-break: break-all; 
+  white-space: normal; 
+  padding: 10px; 
+  box-sizing: border-box; 
 }
+
 
 .toolbox {
   position: absolute;
@@ -402,42 +389,20 @@ i {
   flex-direction: row;
 
   padding: 2px;
-  border-radius: 4px; /* Opcjonalnie, dla zaokrąglonych rogów */
+  border-radius: 4px; 
 }
+
 
 .taskContent {
-  margin-right: 50px; /* Dodanie marginesu, aby tekst nie nachodził na toolbox */
+  margin-right: 50px; 
 }
 
-/*.taskDisplay {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  /*padding: 10px;*/
-  /*border: 1px solid black;
-  margin-left: 0px;
-  margin-top: 20px;
-  font-size: 20px;
-  word-wrap: break-word; /* Allow long words to be broken and wrap to the next line */
-  /*word-break: break-all; /* Break words at any point to wrap to the next line */
-  /*white-space: normal; /* Allow text to wrap */
-/*
 
-.toolbox {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}*/
-
-.fa-solid, 
+.fa-solid,
 .fa-trash {
   margin-right: 10px;
 }
+
 
 .taskDone .taskContent {
   color: rgb(0, 128, 0);
@@ -445,13 +410,23 @@ i {
   flex: 1;
 }
 
+
 .day.tasks-completed {
   border: 2px solid green;
 }
 
+
 .day.has-tasks {
   border: 2px solid red;
 }
+
+@media (max-width: 1300px) {
+  #container {
+  padding-left: 1%;
+  padding-right: 2%;
+}
+}
+
 
 @media (max-width: 1100px) {
   .right-column {
@@ -464,14 +439,27 @@ i {
     text-align: center;
   }
 
+  .top {
+    display: block;
+  }
+
+  #add {
+    display: flex;
+    width: 100%;
+  }
+
   .left-column {
     width: 30%;
   }
-  #taskContainer {
+  #tasksContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: auto;
-    text-align: center;
+    height: 100%;
   }
+
 
   .taskDisplay {
     flex-wrap: wrap;
@@ -481,18 +469,29 @@ i {
     word-wrap: break-word;
   }
 
-  
+
+  #taskForm {
+    width: 80%;
+  }
+
 
   .review {
     display: none;
   }
+ 
+  #container {
+  padding-left: 1%;
+  padding-right: 2%;
+}
 }
 
-/* Media queries for mobile devices */
+
+
 @media (max-width: 768px) {
   #info {
     display: none;
   }
+
 
   #header {
     width: calc(100% - 20px);
@@ -503,24 +502,27 @@ i {
     width: auto;
     height: auto;
     margin: 0;
-    background-color: green;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
 
+
   #user {
     margin-right: 5px;
   }
+
 
   #logout-container {
     margin-top: 10px;
     margin-bottom: 2px;
   }
 
+
   .add {
     display: none;
   }
+
 
   .add-header {
     width: 36px;
@@ -532,7 +534,12 @@ i {
     transform: translateY(-50%);
   }
 
+
   .review {
+    display: none;
+  }
+  
+  .left-column {
     display: none;
   }
 
@@ -545,8 +552,54 @@ i {
     margin: 10px;
     text-align: center;
   }
-  .left-column {
-    display: none;
+
+  .right {
+      display: none;
+  }
+  
+  .left {
+      display: block;
+      width: 100%;
+      height: 100%;
+  }
+
+  .leftDown {
+      display: block;
+      width: 100%;
+      height: 100%;    
+  }
+
+  .rightColumn {
+      display: none;
+  }
+
+  #tasksContainer, #alertDiv {
+    display: flex;
+    min-height: 100px;
+}
+
+#alert {
+  top: 20px;
+  font-size: 1rem;
+}
+ 
+
+  .fa-regular.fa-calendar-days {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+  }
+
+  #toCalendar {
+      width: 36px;
+      height: 36px;
+      display: block;
+      position: absolute;
+      right: 100px;
+      top: 50%;
+      transform: translateY(-50%);
   }
 
   #calendar {
@@ -556,6 +609,7 @@ i {
     padding: 0px;
   }
 
+
   #calendarHeader {
     display: flex;
     justify-content: space-evenly;
@@ -564,10 +618,12 @@ i {
     color: white;
     border-radius: 5px;
 
+
     margin-bottom: 10px;
     font-size: 18px;
     font-weight: bold;
   }
+
 
   #container {
     display: grid;
@@ -576,13 +632,18 @@ i {
     width: 100%;
   }
 
-  .weekDay, 
-  .day, 
+
+  .weekDay,
+  .day,
   .day.empty {
-    width: 80%; /* width: 100% / 7 minus gap */
-    height: calc((100vw - 4px * 7) / 7); /* height: (width of the viewport minus total gaps) divided by 7 */
+    width: 80%; 
+    height: calc((100vw - 4px * 7) / 7); 
     border: 1px solid #000;
     font-size: calc((100vw - 4px * 7) / 20);
     line-height: calc((100vw - 4px * 7) / 7);
+  }
+ 
+  #taskForm {
+    width: 80%;
   }
 }

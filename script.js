@@ -57,8 +57,26 @@ function checkCredentials(username) {
     return users.findIndex(user => user.user === username);
 }
 
+(() => {
+    initializeApp();
+})();
+
+document.addEventListener('click', function(event) {
+    console.log('Rodzaj zdarzenia:', event.type);
+    console.log('Element docelowy:', event.target);
+    console.log('Koordynaty kliknięcia:', event.clientX, event.clientY);
+});
+
 function initializeApp() {
     console.log("Initializing application");
+
+    
+    let alertDiv = document.getElementById('alert');
+    if (!alertDiv) {
+        console.error("Element alertDiv nie został znaleziony w DOM.");
+        return;
+    }
+
     const date = document.getElementById('date');
     const time = document.getElementById('time');
     const container = document.getElementById('container');
@@ -66,14 +84,71 @@ function initializeApp() {
     const yearNumber = document.getElementById('yearNumber');
     const next = document.getElementById('next');
     const prev = document.getElementById('prev');
-    const add = document.querySelector('.add');
+    const add = document.getElementById('add');
     const taskForm = document.getElementById('taskForm');
     const addTask = document.getElementById('addTask');
     const cancel = document.getElementById('cancel');
     const search = document.getElementById('search');
-    const alertDiv = document.getElementById('alert');
     const name = document.getElementById('name');
     const logoutButton = document.getElementById('logout');
+    const leftColumn = document.querySelector('.left-column');
+    const rightColumn = document.querySelector('.right-column');
+    const leftBottom = document.querySelector('.bottom');
+    const topSpace = document.querySelector('.top');
+    const calendarDiv = document.querySelector('#toCalendar');
+    const addIcon = document.querySelector('.fa-solid.fa-circle-plus');
+    const iconCalendar = document.createElement('i');
+
+    addIcon.addEventListener('click', openForm);
+    window.addEventListener('load', recoverRight);
+    window.addEventListener('resize', recoverRight);
+
+    function showLeft() {
+        const width = window.innerWidth;
+        if (width <= 768) {
+            rightColumn.classList.add('right');
+            leftBottom.classList.add('leftDown');
+            leftColumn.classList.add('left');
+            topSpace.style.display = 'none';
+            add.style.display = 'none';
+            showButton();
+            alertDiv.style.display = 'flex';
+        } 
+    }
+
+    function recoverRight() {
+        const width = window.innerWidth;
+        if (width > 768) {
+            console.log('uruchomiono recoverRight');
+            rightColumn.classList.remove('right');
+            leftBottom.classList.remove('leftDown');
+            leftColumn.classList.remove('left');
+            topSpace.style.display = 'flex';
+            add.style.display = 'flex';
+            removeButton();
+        }
+    }
+
+    function showButton() {
+        if (calendarDiv) {
+            iconCalendar.classList.add('fa-regular', 'fa-calendar-days');
+            calendarDiv.appendChild(iconCalendar);
+            iconCalendar.addEventListener('click', showCalendar);
+        }
+    }
+
+    function removeButton() {
+        if (calendarDiv && calendarDiv.contains(iconCalendar)) {
+            calendarDiv.removeChild(iconCalendar);
+        }
+    }
+
+    function showCalendar() {
+        leftColumn.classList.remove('left');
+        leftBottom.classList.remove('leftDown');
+        rightColumn.classList.remove('right');
+        removeButton();
+    }
 
     logoutButton.addEventListener('click', logout);
 
@@ -106,10 +181,9 @@ function initializeApp() {
         searchedText = e.target.value;
         let results = tasks.filter(task => task.taskDescr.toLowerCase().includes(searchedText.toLowerCase()));
         if (searchedText) {
-            displayTasks(results);
-        } else {
-            console.log('brak wyników');
-        }
+            displayTasks(results); 
+            alertDiv.style.display = 'block';
+        } 
     }
 
     function resumeDisplay(text) {
@@ -120,19 +194,34 @@ function initializeApp() {
     function displayTasks(tag) {
         const tasksContainer = document.getElementById('tasksContainer');
         tasksContainer.innerHTML = '';
-        let filteredDate = "";
+        let filteredTasks = [];
 
         if (typeof tag === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(tag)) {
-            filteredDate = tasks.filter(element => element.date === tag);
-            filteredDate.sort((a, b) => a.time.localeCompare(b.time));
+            filteredTasks = tasks.filter(element => element.date === tag);
+            filteredTasks.sort((a, b) => a.time.localeCompare(b.time));
 
-            filteredDate.forEach(task => appendTaskToContainer(task, tasksContainer));
+            filteredTasks.forEach(task => appendTaskToContainer(task, tasksContainer));
         } else if (Array.isArray(tag)) {
-            tag.forEach(task => appendTaskToContainer(task, tasksContainer));
+            filteredTasks = tag;
+            filteredTasks.sort((a, b) => {
+                if (a.date === b.date) {
+                    return a.time.localeCompare(b.time);
+                } else {
+                    return a.date.localeCompare(b.date);
+                }
+            });
+            filteredTasks.forEach(task => appendTaskToContainer(task, tasksContainer));
         }
-        if (filteredDate.length < 1 && !search.value === "") {
-            tasksContainer.appendChild(alertDiv);
-            alertDiv.style.display = "flex";
+
+        if (alertDiv) {
+            if (filteredTasks.length < 1) {
+                tasksContainer.appendChild(alertDiv);
+                alertDiv.style.display = "flex";
+            } else {
+                alertDiv.style.display = "none";
+            }
+        } else {
+            console.error("Element alertDiv nie został znaleziony w DOM.");
         }
     }
 
@@ -145,7 +234,7 @@ function initializeApp() {
 
         const taskContent = document.createElement('div');
         taskContent.className = "taskContent";
-        taskContent.textContent = `${task.date}, ${task.time}, Opis: ${task.taskDescr}`;
+        taskContent.textContent = `${task.date}, ${task.time}, \u00A0\u00A0 ${task.taskDescr}`;
         taskElement.appendChild(taskContent);
 
         const toolbox = document.createElement('div');
@@ -222,8 +311,15 @@ function initializeApp() {
 
     function updateDateTime() {
         const now = new Date();
+        let dateFormatter;
+        const width = window.innerWidth;
 
-        const dateFormatter = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'full' });
+        if (width <= 768) {
+            dateFormatter = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'short' });
+        } else {
+            dateFormatter = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'full' });
+        }
+
         const timeFormatter = new Intl.DateTimeFormat('pl-PL', {
             hour: '2-digit',
             minute: '2-digit',
@@ -231,7 +327,12 @@ function initializeApp() {
         });
 
         date.textContent = dateFormatter.format(now);
-        time.textContent = `Godzina: ${timeFormatter.format(now)}`;
+
+        if (width <= 768) {
+            time.textContent = `${timeFormatter.format(now)}`;
+        } else {
+            time.textContent = `Godzina: ${timeFormatter.format(now)}`;
+        }
     }
 
     function nextMonth() {
@@ -242,8 +343,8 @@ function initializeApp() {
         }
         updateCalendar();
     }
-
-    function prevMonth() {
+	
+	function prevMonth() {
         currentMonth--;
         if (currentMonth < 0) {
             currentMonth = 11;
@@ -258,6 +359,15 @@ function initializeApp() {
         dayName();
         generateCalendar();
         markDaysWithTasks();
+        displayTasksForMonth(); 
+    }
+
+    function displayTasksForMonth() {
+        const monthStart = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-01`;
+        const monthEnd = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${new Date(currentYear, currentMonth + 1, 0).getDate()}`;
+
+        let tasksForMonth = tasks.filter(task => task.date >= monthStart && task.date <= monthEnd);
+        displayTasks(tasksForMonth);
     }
 
     function clearCalendar() {
@@ -275,15 +385,14 @@ function initializeApp() {
         let firstDay = new Date(currentYear, currentMonth).getDay();
         firstDay = firstDay === 0 ? 6 : firstDay - 1;
         let today = new Date();
-    
+
         for (let i = 0; i < firstDay; i++) {
             let emptyCell = document.createElement('div');
             emptyCell.className = "day empty";
             container.appendChild(emptyCell);
         }
-    
-        let day;
-        for (day = 1; day <= daysInMonth; day++) {
+
+        for (let day = 1; day <= daysInMonth; day++) {
             let dayElement = document.createElement('div');
             dayElement.className = "day";
             dayElement.textContent = day;
@@ -294,7 +403,7 @@ function initializeApp() {
             container.appendChild(dayElement);
         }
     }
-    
+
     function dayName() {
         const days = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
         days.forEach(day => {
@@ -304,7 +413,6 @@ function initializeApp() {
             container.appendChild(dayOfWeek);
         });
     }
-    
 
     function openForm() {
         taskForm.style.display = 'flex';
@@ -325,7 +433,7 @@ function initializeApp() {
 
     function closeForm() {
         taskForm.style.display = 'none';
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+        localStorage.setItem(currentUser, JSON.stringify(tasks));
     }
 
     function generateUniqueId() {
@@ -333,6 +441,7 @@ function initializeApp() {
     }
 
     function handleDayClick(event) {
+        showLeft();
         let dayNumber = event.target.textContent;
         const clickedDate = new Date(currentYear, currentMonth, dayNumber);
         const dateFormatter = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'numeric', year: 'numeric' });
@@ -378,20 +487,3 @@ function initializeApp() {
     updateDateTime();
     updateCalendar();
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    function checkScreenWidth() {
-        const screenWidth = screen.width;
-        const addButton = document.querySelector('.fa-circle-plus');
-
-        if (screenWidth < 768) {
-            document.querySelector('.add-header').appendChild(addButton);
-        } else {
-            document.querySelector('.top .add').appendChild(addButton);
-        }
-    }
-
-    checkScreenWidth();
-
-    window.addEventListener('resize', checkScreenWidth);
-});

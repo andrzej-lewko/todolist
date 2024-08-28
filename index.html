@@ -10,6 +10,7 @@
 <body>
     <div class="container">
         <div class="header">
+            <div id="toCalendar"></div>
             <div id="currentDate">
                 <div id="date"></div>
                 <div id="time"></div>
@@ -24,7 +25,7 @@
         <div class="content">
             <div class="left-column">
                 <div class="top">
-                    <div class="add"><!--<i class="fa-solid fa-circle-plus"></i>--></div>
+                    <div id="add"><i class="fa-solid fa-circle-plus"></i></div>
                     <div class="review">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" id="search" placeholder="Szukaj..." value="">
@@ -52,13 +53,14 @@
             </div>
         </div>
         <form action="#" id="taskForm">
-            <div id="nameForm">Zaplanuj zadanie</div>
-            <input type="date" name="date" id="dateTask">
-            <input type="time" name="time" id="timeTask">
-            <input type="textarea" name="textarea" id="content">
-            <button id="cancel">Anuluj</button>
-            <button id="addTask" value="Dodaj">Dodaj</button>
-        </form>    
+			<div id="nameForm">Zaplanuj zadanie</div>
+			<input type="date" name="date" id="dateTask">
+			<input type="time" name="time" id="timeTask">
+			<textarea name="textarea" id="content" rows="5"></textarea>
+			<button id="cancel">Anuluj</button>
+			<button id="addTask" value="Dodaj">Dodaj</button>
+		</form>
+ 
     </div>
     <script src="script.js"></script>
 </body>

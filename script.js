@@ -40,7 +40,6 @@ if (window.location.href.includes('login.html')) {
     });
 } else if (window.location.href.includes('index.html')) {
     if (localStorage.getItem('loggedIn')) {
-        console.log("Index page detected and user is logged in");
         initializeApp();
     } else {
         console.log("User not logged in, redirecting to login.html");
@@ -57,20 +56,10 @@ function checkCredentials(username) {
     return users.findIndex(user => user.user === username);
 }
 
-(() => {
-    initializeApp();
-})();
-
-document.addEventListener('click', function(event) {
-    console.log('Rodzaj zdarzenia:', event.type);
-    console.log('Element docelowy:', event.target);
-    console.log('Koordynaty kliknięcia:', event.clientX, event.clientY);
-});
 
 function initializeApp() {
     console.log("Initializing application");
 
-    
     let alertDiv = document.getElementById('alert');
     if (!alertDiv) {
         console.error("Element alertDiv nie został znaleziony w DOM.");
@@ -84,7 +73,6 @@ function initializeApp() {
     const yearNumber = document.getElementById('yearNumber');
     const next = document.getElementById('next');
     const prev = document.getElementById('prev');
-    const add = document.getElementById('add');
     const taskForm = document.getElementById('taskForm');
     const addTask = document.getElementById('addTask');
     const cancel = document.getElementById('cancel');
@@ -94,61 +82,13 @@ function initializeApp() {
     const leftColumn = document.querySelector('.left-column');
     const rightColumn = document.querySelector('.right-column');
     const leftBottom = document.querySelector('.bottom');
-    const topSpace = document.querySelector('.top');
     const calendarDiv = document.querySelector('#toCalendar');
-    const addIcon = document.querySelector('.fa-solid.fa-circle-plus');
     const iconCalendar = document.createElement('i');
+    const addButton = document.querySelector('.add-header');
+    addButton.addEventListener('click', openForm);
 
-    addIcon.addEventListener('click', openForm);
-    window.addEventListener('load', recoverRight);
-    window.addEventListener('resize', recoverRight);
-
-    function showLeft() {
-        const width = window.innerWidth;
-        if (width <= 768) {
-            rightColumn.classList.add('right');
-            leftBottom.classList.add('leftDown');
-            leftColumn.classList.add('left');
-            topSpace.style.display = 'none';
-            add.style.display = 'none';
-            showButton();
-            alertDiv.style.display = 'flex';
-        } 
-    }
-
-    function recoverRight() {
-        const width = window.innerWidth;
-        if (width > 768) {
-            console.log('uruchomiono recoverRight');
-            rightColumn.classList.remove('right');
-            leftBottom.classList.remove('leftDown');
-            leftColumn.classList.remove('left');
-            topSpace.style.display = 'flex';
-            add.style.display = 'flex';
-            removeButton();
-        }
-    }
-
-    function showButton() {
-        if (calendarDiv) {
-            iconCalendar.classList.add('fa-regular', 'fa-calendar-days');
-            calendarDiv.appendChild(iconCalendar);
-            iconCalendar.addEventListener('click', showCalendar);
-        }
-    }
-
-    function removeButton() {
-        if (calendarDiv && calendarDiv.contains(iconCalendar)) {
-            calendarDiv.removeChild(iconCalendar);
-        }
-    }
-
-    function showCalendar() {
-        leftColumn.classList.remove('left');
-        leftBottom.classList.remove('leftDown');
-        rightColumn.classList.remove('right');
-        removeButton();
-    }
+    iconCalendar.classList.add('fa-regular', 'fa-calendar-days');
+    iconCalendar.addEventListener('click', showCalendar);
 
     logoutButton.addEventListener('click', logout);
 
@@ -164,12 +104,57 @@ function initializeApp() {
     search.addEventListener('keyup', searchTask);
     next.addEventListener("click", nextMonth);
     prev.addEventListener("click", prevMonth);
-    add.addEventListener("click", openForm);
     addTask.addEventListener("click", function (event) {
         event.preventDefault();
         checkTask(event.target.value, document.getElementById("addTask").getAttribute('data-task-id'));
     });
     cancel.addEventListener("click", closeForm);
+
+    function showLeft() {
+        const width = window.innerWidth;
+        if (width <= 768) {
+            rightColumn.classList.add('right');
+            leftBottom.classList.add('leftDown');
+            leftColumn.classList.add('left');
+            alertDiv.style.display = 'flex';
+
+            if (!calendarDiv.contains(iconCalendar)) {
+                calendarDiv.appendChild(iconCalendar);
+            }
+
+            calendarDiv.style.display = 'block';
+            iconCalendar.style.display = 'block';
+            console.log('showLeft');
+        }
+    }
+
+    function recoverRight() {
+        const width = window.innerWidth;
+        if (width > 768) {
+            rightColumn.classList.remove('right');
+            leftBottom.classList.remove('leftDown');
+            leftColumn.classList.remove('left');
+
+            if (calendarDiv.contains(iconCalendar)) {
+                calendarDiv.removeChild(iconCalendar);
+            }
+
+            iconCalendar.style.display = 'none';
+        } else {
+            if (!leftColumn.classList.contains('left')) {
+                iconCalendar.style.display = 'none';
+            } else {
+                iconCalendar.style.display = 'block';
+            }
+        }
+    }
+
+    function showCalendar() {
+        leftColumn.classList.remove('left');
+        leftBottom.classList.remove('leftDown');
+        rightColumn.classList.remove('right');
+        iconCalendar.style.display = 'none';
+    }
 
     function logout() {
         localStorage.removeItem('loggedIn');
@@ -181,9 +166,9 @@ function initializeApp() {
         searchedText = e.target.value;
         let results = tasks.filter(task => task.taskDescr.toLowerCase().includes(searchedText.toLowerCase()));
         if (searchedText) {
-            displayTasks(results); 
+            displayTasks(results);
             alertDiv.style.display = 'block';
-        } 
+        }
     }
 
     function resumeDisplay(text) {
@@ -343,8 +328,8 @@ function initializeApp() {
         }
         updateCalendar();
     }
-	
-	function prevMonth() {
+
+    function prevMonth() {
         currentMonth--;
         if (currentMonth < 0) {
             currentMonth = 11;
@@ -359,7 +344,7 @@ function initializeApp() {
         dayName();
         generateCalendar();
         markDaysWithTasks();
-        displayTasksForMonth(); 
+        displayTasksForMonth();
     }
 
     function displayTasksForMonth() {
@@ -462,18 +447,45 @@ function initializeApp() {
         let timeValue = document.getElementById('timeTask').value;
         let taskContent = document.getElementById('content').value;
 
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+        const formDate = dateValue + " " + timeValue;
+
+        if (formattedDateTime > formDate) {
+            alert("Wybrana data lub godzina leżą w przeszłości!")
+            return;
+        }
+
+        if (!dateValue || !timeValue || !taskContent) {
+            alert("Wypełnij wszystkie pola!");
+            return;
+        }
+
         if (isEdit) {
             id = ID;
             let newData = tasks.find(element => element.id === ID);
             newData.date = dateValue;
             newData.time = timeValue;
             newData.taskDescr = taskContent;
+            console.log("Updated Task:", newData);
         } else {
             id = generateUniqueId();
             let newTask = { id, date: dateValue, time: timeValue, taskDescr: taskContent, completed: false };
             tasks.push(newTask);
-            localStorage.setItem(currentUser, JSON.stringify(tasks));
+            console.log("New Task Added:", newTask);
         }
+
+        localStorage.setItem(currentUser, JSON.stringify(tasks));
+        console.log("Tasks saved to localStorage:", tasks);
 
         document.getElementById('dateTask').value = '';
         document.getElementById('timeTask').value = '';
@@ -482,6 +494,9 @@ function initializeApp() {
         closeForm();
         displayTasks(dateValue);
     }
+
+    window.addEventListener('resize', recoverRight);
+    window.addEventListener('load', recoverRight);
 
     setInterval(() => updateDateTime(), 1000);
     updateDateTime();

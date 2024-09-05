@@ -93,6 +93,23 @@ function initializeApp() {
     const addButton = document.querySelector('.add-header');
     const width = window.innerWidth;
 
+    document.addEventListener('click', function(e) {
+        alert('Event: click, Element: ' + e.target.id);
+    });
+    
+    document.addEventListener('focus', function(e) {
+        alert('Event: focus, Element: ' + e.target.id);
+    }, true);  // używamy `true`, aby nasłuchiwać zdarzenia podczas fazy capture
+    
+    document.addEventListener('input', function(e) {
+        alert('Event: input, Element: ' + e.target.id);
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        alert('Event: keydown, Element: ' + e.target.id);
+    });
+    
+
     addButton.addEventListener('click', openForm); // Otwieranie formularza dodawania zadania
     logoutButton.addEventListener('click', logout); // Wylogowywanie użytkownika
 
@@ -119,7 +136,7 @@ function initializeApp() {
 
     // Funkcja wyświetlająca lewy panel na urządzeniach mobilnych
     function showLeft() {
-        alert('showLeft')
+        alert('Function: showLeft, Active Element: ' + document.activeElement.id);
         if (document.activeElement.id === 'search') {
             return; // Nie przełączaj panelu, jeśli pole search jest aktywne
         }
@@ -138,7 +155,7 @@ function initializeApp() {
 
     // Funkcja przywracająca widok prawego panelu
     function recoverRight() {
-        alert('recoverRight')
+        alert('Function: recoverRight, Active Element: ' + document.activeElement.id);
         rightColumn.classList.remove('right');
         leftBottom.classList.remove('leftDown');
         leftColumn.classList.remove('left');

@@ -119,6 +119,9 @@ function initializeApp() {
 
     // Funkcja wyświetlająca lewy panel na urządzeniach mobilnych
     function showLeft() {
+        if (document.activeElement.id === 'search') {
+            return; // Nie przełączaj panelu, jeśli pole search jest aktywne
+        }
         rightColumn.classList.add('right');
         leftBottom.classList.add('leftDown');
         leftColumn.classList.add('left');

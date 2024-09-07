@@ -168,8 +168,8 @@ function initializeApp() {
         leftColumn.classList.remove('left');
         leftBottom.classList.remove('leftDown');
         rightColumn.classList.remove('right');
-        recoverRight();
     }
+    
     // Ukrywanie ikony odpowiedzialnej za przełączanie paneli
     function hideIcon() {
         if (window.innerWidth > 768) {
@@ -477,23 +477,24 @@ function initializeApp() {
 
     // Funkcja obsługująca kliknięcie dnia w kalendarzu
     function handleDayClick(event) {
-        if (width <= 768) {
-            showLeft(); // Wyświetlanie lewego panelu na urządzeniach mobilnych
+        if (window.innerWidth <= 768) {
+            showLeft(); // Jawne wywołanie, aby przełączyć na lewy panel
         }
         console.log(event);
         let dayNumber = event.target.textContent;
         const clickedDate = new Date(currentYear, currentMonth, dayNumber);
         const dateFormatter = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'numeric', year: 'numeric' });
         let formattedDate = dateFormatter.format(clickedDate);
-
+    
         if (formattedDate.length < 10) {
             formattedDate = "0" + formattedDate;
         }
-
+    
         const newFormattedDate = formattedDate.replace(/\./g, "-");
         let reversedDate = newFormattedDate.split("-").reverse().join("-");
         displayTasks(reversedDate); // Wyświetlanie zadań dla wybranego dnia
     }
+    
 
     // Funkcja zarządzająca dodawaniem lub edycją zadania
     function manageTask(isEdit, ID) {

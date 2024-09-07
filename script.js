@@ -508,7 +508,7 @@ function initializeApp() {
         const formDate = dateValue + " " + timeValue;
 
         if (formattedDateTime > formDate) {
-            alert("Wybierz poprawną datę i godzinę!");
+            alert("Data lub gidzina leżą w przeszłości!");
             return;
         }
 

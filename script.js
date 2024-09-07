@@ -456,8 +456,13 @@ function initializeApp() {
 
     // Funkcja zamykająca formularz
     function closeForm() {
+        document.getElementById("nameForm").textContent = 'Zaplanuj zadanie';
+        document.getElementById("addTask").textContent = 'Dodaj';
+        document.getElementById("addTask").value = "Dodaj";
+        document.getElementById("addTask").removeAttribute('data-task-id');
         taskForm.style.display = 'none';
         localStorage.setItem(currentUser, JSON.stringify(tasks)); // Zapisanie zadań do localStorage po zamknięciu formularza
+        
     }
 
     // Funkcja generująca unikalne ID dla zadania
@@ -508,7 +513,7 @@ function initializeApp() {
         const formDate = dateValue + " " + timeValue;
 
         if (formattedDateTime > formDate) {
-            alert("Data lub gidzina leżą w przeszłości!");
+            alert("Data lub godzina leżą w przeszłości!");
             return;
         }
 

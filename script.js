@@ -144,15 +144,12 @@ function initializeApp() {
         viewSwitch.classList.remove('fa-solid', 'fa-list-check');
         viewSwitch.classList.add('fa-regular', 'fa-calendar-days');
         viewSwitch.addEventListener('click', showCalendar);
-        
-        console.log('showLeft');
     }
 
     // Funkcja przywracająca widok prawego panelu
     function recoverRight() {
         
         if (isInputFocused) {
-            
             return;
         }
 
@@ -172,6 +169,14 @@ function initializeApp() {
         leftBottom.classList.remove('leftDown');
         rightColumn.classList.remove('right');
         recoverRight();
+    }
+    // Ukrywanie ikony odpowiedzialnej za przełączanie paneli
+    function hideIcon() {
+        if (window.innerWidth > 768) {
+            viewSwitch.style.display = 'none';
+        } else {
+            viewSwitch.style.display = 'block';
+        }   
     }
 
     // Funkcja wylogowująca użytkownika
@@ -548,6 +553,7 @@ function initializeApp() {
 
     window.addEventListener('resize', recoverRight); // Obsługa zmiany rozmiaru okna
     window.addEventListener('load', recoverRight); // Obsługa ładowania strony
+    window.addEventListener('resize', hideIcon);
 
     setInterval(() => updateDateTime(), 1000); // Aktualizacja daty i czasu co sekundę
     updateDateTime(); // Inicjalna aktualizacja daty i czasu

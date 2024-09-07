@@ -89,6 +89,10 @@ div {
   transform: translateY(-50%);
 }
 
+#toCalendar {
+  display: none;
+}
+
 .content {
   display: flex;
   width: 100%;
@@ -476,10 +480,6 @@ textarea {
     display: none;
   }
 
-  #viewSwitch {
-    display: block;
-  }
-
   .add-header {
     width: 36px;
     height: 36px;
@@ -581,6 +581,7 @@ textarea {
   }
   
   #viewSwitch {
+    display: block;
 	  width: 36px;
 	  height: 36px;
   }
